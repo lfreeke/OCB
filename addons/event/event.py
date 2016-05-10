@@ -154,7 +154,7 @@ class event_event(osv.osv):
                 elif field == 'register_avail':
                     #the number of ticket is unlimited if the event.register_max field is not set.
                     #In that cas we arbitrary set it to 9999, it is used in the kanban view to special case the display of the 'subscribe' button
-                    number = event.register_max - reg_open if event.register_max != 0 else 9999
+                    number = (event.register_max - reg_open - reg_done) if event.register_max != 0 else 9999
                 res[event.id][field] = number
         return res
 
