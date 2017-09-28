@@ -247,6 +247,9 @@ class res_partner(osv.osv):
         user = self.pool['res.users'].browse(cr, uid, uid, context=context)
         user_currency_id = user.company_id.currency_id.id
         for partner_id in ids:
+            # basically patching away the total invoice calculation
+            result[partner_id] = 0.00
+            continue
             all_partner_ids = self.pool['res.partner'].search(
                 cr, uid, [('id', 'child_of', partner_id)], context=context)
 
